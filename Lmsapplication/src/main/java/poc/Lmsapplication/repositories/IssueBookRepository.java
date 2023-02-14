@@ -1,0 +1,21 @@
+package poc.Lmsapplication.repositories;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import poc.Lmsapplication.entities.IssueBook;
+
+import java.util.Date;
+import java.util.List;
+
+/**
+ * IssueBookRepository of API
+ *
+ * @author deeksha.singh
+ */
+
+@Repository
+public interface IssueBookRepository extends JpaRepository<IssueBook, Long> {
+
+    public List<IssueBook> findByReturnDate(Date date);
+
+}
