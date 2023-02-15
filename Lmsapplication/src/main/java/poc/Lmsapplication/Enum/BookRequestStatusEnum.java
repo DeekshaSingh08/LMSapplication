@@ -7,7 +7,11 @@ package poc.Lmsapplication.Enum;
  */
 public enum BookRequestStatusEnum {
 
-    APPROVED,
-    REJECTED
+   PENDING(0),
+   APPROVED(1),
+   REJECTED(2);
 
+    BookRequestStatusEnum(int i) {
+
+    }
 }

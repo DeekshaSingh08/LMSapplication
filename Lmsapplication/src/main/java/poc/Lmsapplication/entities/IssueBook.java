@@ -27,15 +27,23 @@ public class IssueBook {
     private Date returnDate;
     private Date returnedDate;
 
-    public IssueBook(Long issueId, BookDetails bookDetails, User user, Date issueDate, Date returnDate,
-                     Date returnedDate) {
-        super();
+    private enum RespondDate {
+        PENDING,
+        APPROVED,
+        REJECTED
+    }
+
+    @Enumerated(EnumType.STRING)
+    private RespondDate respondDate;
+
+    public IssueBook(Long issueId, BookDetails bookDetails, User user, Date issueDate, Date returnDate, Date returnedDate, RespondDate respondDate) {
         this.issueId = issueId;
         this.bookDetails = bookDetails;
         this.user = user;
         this.issueDate = issueDate;
         this.returnDate = returnDate;
         this.returnedDate = returnedDate;
+        this.respondDate = respondDate;
     }
 
     public Long getIssueId() {
@@ -84,6 +92,14 @@ public class IssueBook {
 
     public void setReturnedDate(Date returnedDate) {
         this.returnedDate = returnedDate;
+    }
+
+    public RespondDate getRespondDate() {
+        return respondDate;
+    }
+
+    public void setRespondDate(RespondDate respondDate) {
+        this.respondDate = respondDate;
     }
 
     public IssueBook() {
