@@ -1,5 +1,7 @@
 package poc.Lmsapplication.entities;
 
+import poc.Lmsapplication.Enum.ResponseStatus;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -26,24 +28,17 @@ public class IssueBook {
     private Date issueDate;
     private Date returnDate;
     private Date returnedDate;
-
-    private enum RespondDate {
-        PENDING,
-        APPROVED,
-        REJECTED
-    }
-
     @Enumerated(EnumType.STRING)
-    private RespondDate respondDate;
+    private ResponseStatus responseStatus;
 
-    public IssueBook(Long issueId, BookDetails bookDetails, User user, Date issueDate, Date returnDate, Date returnedDate, RespondDate respondDate) {
+    public IssueBook(Long issueId, BookDetails bookDetails, User user, Date issueDate, Date returnDate, Date returnedDate) {
         this.issueId = issueId;
         this.bookDetails = bookDetails;
         this.user = user;
         this.issueDate = issueDate;
         this.returnDate = returnDate;
         this.returnedDate = returnedDate;
-        this.respondDate = respondDate;
+
     }
 
     public Long getIssueId() {
@@ -94,12 +89,12 @@ public class IssueBook {
         this.returnedDate = returnedDate;
     }
 
-    public RespondDate getRespondDate() {
-        return respondDate;
+    public ResponseStatus getResponseStatus() {
+        return responseStatus;
     }
 
-    public void setRespondDate(RespondDate respondDate) {
-        this.respondDate = respondDate;
+    public void setResponseStatus(ResponseStatus responseStatus) {
+        this.responseStatus = responseStatus;
     }
 
     public IssueBook() {

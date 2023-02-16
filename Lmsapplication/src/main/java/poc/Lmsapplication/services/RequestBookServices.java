@@ -28,8 +28,11 @@ public class RequestBookServices {
 
     public RequestBookDetail addRequest(RequestBookDto requestBookDto, long id) {
         RequestBookDetail requestBookDetail = new RequestBookDetail();
+
         User user = userRepository.findById(id).orElse(null);
+        System.out.println("user"+user);
         int size = bookDetailsRepository.findByBookName(requestBookDto.getBookName()).size();
+        System.out.println(size);
         if (size == 0 & user != null) {
             requestBookDetail.setBookCategory(requestBookDto.getCategory());
             requestBookDetail.setAuthorName(requestBookDto.getAuthorName());
@@ -45,4 +48,9 @@ public class RequestBookServices {
     public List<RequestBookDetail> getAllRequests() {
         return requestBookDetailRepository.findAll();
     }
+
+//    public List<RequestBookDetail> getAllResponse(){
+//
+//        return requestBookDetailRepository.findAll();
+//    }
 }

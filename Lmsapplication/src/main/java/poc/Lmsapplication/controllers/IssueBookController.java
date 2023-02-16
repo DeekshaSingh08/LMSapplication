@@ -2,6 +2,7 @@ package poc.Lmsapplication.controllers;
 
 import java.util.List;
 
+import poc.Lmsapplication.Enum.ResponseStatus;
 import poc.Lmsapplication.entities.IssueBook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,10 @@ public class IssueBookController {
         return issueBookService.addIssue(bookid, userid);
 
     }
+    @PostMapping("/addResponse")
+    public String addResponse(@RequestParam("issueId") long issueId,@RequestParam("responseStatus") int responseStatus){
+        return issueBookService.addResponse(issueId,responseStatus);
+    }
 
     @GetMapping("/getAllIssues")
     public List<IssueBook> getAllIssues() {
@@ -45,6 +50,5 @@ public class IssueBookController {
     public List<IssueBook> findAllBookOverdue() {
         return issueBookService.findAllBookOverdue();
     }
-
 
 }

@@ -1,7 +1,5 @@
 package poc.Lmsapplication.entities;
 
-import poc.Lmsapplication.Enum.BookRequestStatusEnum;
-
 import java.util.Date;
 import javax.persistence.*;
 
@@ -28,9 +26,6 @@ public class RequestBookStatus {
     private Date rentalRequestDate;
     private Date statusResponseDate;
     private Date returnDate;
-
-    @Enumerated(EnumType.STRING)
-    private BookRequestStatusEnum bookRequestStatusEnum;
 
     public RequestBookStatus() {
     }
@@ -84,19 +79,14 @@ public class RequestBookStatus {
     }
 
     public RequestBookStatus(Long requestBookStatus, BookDetails bookDetails, User user, Date rentalRequestDate,
-                             Date statusResponseDate, Date returnDate, BookRequestStatusEnum bookRequestStatusEnum) {
+                             Date statusResponseDate, Date returnDate) {
         this.requestBookStatusId = requestBookStatus;
         this.bookDetails = bookDetails;
         this.user = user;
         this.rentalRequestDate = rentalRequestDate;
         this.statusResponseDate = statusResponseDate;
         this.returnDate = returnDate;
-        this.bookRequestStatusEnum = bookRequestStatusEnum;
     }
 
-    public RequestBookStatus(BookRequestStatusEnum bookRequestStatusEnum) {
-
-        this.bookRequestStatusEnum = bookRequestStatusEnum;
-    }
 
 }

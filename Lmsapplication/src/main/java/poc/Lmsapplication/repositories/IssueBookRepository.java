@@ -18,4 +18,5 @@ public interface IssueBookRepository extends JpaRepository<IssueBook, Long> {
 
     public List<IssueBook> findByReturnDate(Date date);
 
+    //List<IssueBook> findResponseById();
 }

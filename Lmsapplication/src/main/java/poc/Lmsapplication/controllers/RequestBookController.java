@@ -32,4 +32,10 @@ public class RequestBookController {
     public List<RequestBookDetail> getRequests() {
         return requestbookservices.getAllRequests();
     }
+
+//    @GetMapping("/getAllResponse")
+//    public  List<RequestBookDetail> getAllResponse(){
+//        return requestbookservices.getAllResponse();
+//    }
+
 }

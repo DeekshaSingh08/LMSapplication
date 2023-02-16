@@ -1,7 +1,5 @@
 package poc.Lmsapplication.dto;
 
-import poc.Lmsapplication.Enum.BookRequestStatusEnum;
-
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import java.util.Date;
@@ -19,15 +17,11 @@ public class RequestBookStatusDto {
     private Date statusResponseDate;
     private Date returnDate;
 
-    @Enumerated(EnumType.STRING)
-    private BookRequestStatusEnum bookRequestStatusEnum;
-
-    public RequestBookStatusDto(String bookName, Date rentalRequestDate, Date statusResponseDate, Date returnDate, BookRequestStatusEnum bookRequestStatusEnum) {
+    public RequestBookStatusDto(String bookName, Date rentalRequestDate, Date statusResponseDate, Date returnDate) {
         this.bookName = bookName;
         this.rentalRequestDate = rentalRequestDate;
         this.statusResponseDate = statusResponseDate;
         this.returnDate = returnDate;
-        this.bookRequestStatusEnum = bookRequestStatusEnum;
     }
 
     public String getBookName() {
@@ -62,7 +56,5 @@ public class RequestBookStatusDto {
         this.returnDate = returnDate;
     }
 
-    public RequestBookStatusDto(BookRequestStatusEnum bookRequestStatusEnum) {
-        this.bookRequestStatusEnum = bookRequestStatusEnum;
-    }
+
 }
