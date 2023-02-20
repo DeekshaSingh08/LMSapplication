@@ -20,8 +20,9 @@ public interface BookDetailsRepository extends JpaRepository<BookDetails, Long> 
  //   @Query("select * from book_details bd inner join book_category c on bd.book_category=c.category_id where 12<=c.max_age and c.min_age<=12")
 //    @Query("SELECT category FROM BookCategory category JOIN category.BookCategory category WHERE category.minAge LIKE %?1%")
 //    @Query("select bd from book_details bd join bd.book_category bc where bc.category like '%?%' && bc.min_age >= ?")
-    @Query( value = "select * from book_details bd inner join book_category c on bd.book_category=c.category_id where c.min_age<=12",nativeQuery = true)
-    public List<BookDetails> findByCategoryAndAge(String category, int minAge);
+//    @Query( value = "select * from book_details bd inner join book_category c on bd.book_category=c.category_id where c.min_age<=12",nativeQuery = true)
+    @Query(value = "{call searchBooksByCategoryAndAge(?1,?2)}", nativeQuery = true)
+    public List<Long> getDetailsByAgeAndCategory(String category, int minAge);
 
 //book_id,author_name,book_name,quality,quantity,book_category
 }

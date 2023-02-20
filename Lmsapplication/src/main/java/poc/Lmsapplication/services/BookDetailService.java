@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import poc.Lmsapplication.repositories.BookDetailsRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -61,7 +62,12 @@ public class BookDetailService {
     }
 
     public List<BookDetails> searchBooksByCategoryAndAge(String category, int minAge) {
-      return bookDetailsRepository.findByCategoryAndAge(category,minAge);
+        List<BookDetails> bookDetails=new ArrayList<>();
+        bookDetailsRepository.getDetailsByAgeAndCategory(category,minAge).forEach(n->{
+            bookDetails.add(bookDetailsRepository.findById(n).orElse(null));
+        });
+        return bookDetails;
+      //return bookDetailsRepository.getDetailsByAgeAndCategory(category,minAge);
    }
 
 
