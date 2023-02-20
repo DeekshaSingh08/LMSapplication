@@ -11,7 +11,7 @@ import javax.persistence.Id;
  * @author deeksha.singh
  */
 
-@Entity
+@Entity(name = "book_category")
 public class BookCategory {
 
     @Id

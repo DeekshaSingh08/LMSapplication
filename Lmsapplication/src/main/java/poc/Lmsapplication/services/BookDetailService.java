@@ -60,9 +60,9 @@ public class BookDetailService {
         }
     }
 
-//    public List<BookDetails> searchBooks(String keyword) {
-//        return null;
-//    }
+    public List<BookDetails> searchBooksByCategoryAndAge(String category, int minAge) {
+      return bookDetailsRepository.findByCategoryAndAge(category,minAge);
+   }
 
 
 }

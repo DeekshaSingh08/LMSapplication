@@ -49,8 +49,4 @@ public class RequestBookServices {
         return requestBookDetailRepository.findAll();
     }
 
-//    public List<RequestBookDetail> getAllResponse(){
-//
-//        return requestBookDetailRepository.findAll();
-//    }
 }

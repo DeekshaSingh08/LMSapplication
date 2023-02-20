@@ -22,21 +22,26 @@ public class BookDetailController {
     BookDetailService bookDetailService;
 
     @GetMapping("/book")
-    private List<BookDetails> findAllBooks() {
+    public List<BookDetails> findAllBooks() {
         return bookDetailService.findAllBooks();
     }
 
     @GetMapping("/book/{id}")
-    private BookDetails getBooks(@PathVariable("id") Long id) {
+    public BookDetails getBooks(@PathVariable("id") Long id) {
 
         return bookDetailService.findBookById(id);
     }
 
     @PostMapping("/saveBook")
-    private BookDetails saveBook(@RequestBody BookDetails books) {
+    public BookDetails saveBook(@RequestBody BookDetails books) {
 
         return bookDetailService.createBook(books);
 
+    }
+
+    @GetMapping("/searchBooksByCategory&Age")
+    public List<BookDetails> searchBooksByCategoryAndAge(@RequestParam("category") String category,@RequestParam("minAge") int minAge){
+        return bookDetailService.searchBooksByCategoryAndAge(category,minAge);
     }
 
     @RequestMapping(value = "/updateBook/{id}", method = RequestMethod.PUT)
@@ -45,7 +50,7 @@ public class BookDetailController {
     }
 
     @DeleteMapping("/deleteBook/{id}")
-    private ResponseEntity<Object> deleteBook(@PathVariable("id") Long id) {
+    public ResponseEntity<Object> deleteBook(@PathVariable("id") Long id) {
         bookDetailService.deleteBook(id);
         return new ResponseEntity<>("Book was deleted sucessfully", HttpStatus.OK);
 

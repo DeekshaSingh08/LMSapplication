@@ -20,12 +20,12 @@ public class BookCategoryController {
     BookCategoryService bookCategoryService;
 
     @GetMapping("/category")
-    private List<BookCategory> findAllCategories() {
+    public List<BookCategory> findAllCategories() {
         return bookCategoryService.findAllCategories();
     }
 
     @GetMapping("/category/{id}")
-    private List<BookCategory> findCategoryById(@PathVariable("id") Long id) {
+    public List<BookCategory> findCategoryById(@PathVariable("id") Long id) {
         return bookCategoryService.findCategoryById(id);
     }
 
@@ -35,12 +35,12 @@ public class BookCategoryController {
     }
 
     @PutMapping("/updateCategory")
-    private BookCategory updateCategory(@RequestBody BookCategory bookCategory) {
+    public BookCategory updateCategory(@RequestBody BookCategory bookCategory) {
         return bookCategoryService.updateCategory(bookCategory);
     }
 
     @DeleteMapping("/deleteCategory/{id}")
-    private void deleteCategory(@PathVariable("id") Long id) {
+    public void deleteCategory(@PathVariable("id") Long id) {
         bookCategoryService.deleteCategory(id);
     }
 

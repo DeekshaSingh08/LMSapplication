@@ -20,22 +20,14 @@ public class RequestBookController {
     private RequestBookServices requestbookservices;
 
     @PostMapping("/addRequest/{id}")
-
-
     public RequestBookDetail addRequest(@RequestBody RequestBookDto requestBookDto, @PathVariable("id") long id) {
         return requestbookservices.addRequest(requestBookDto, id);
     }
 
     @GetMapping("/getRequests")
-
-
     public List<RequestBookDetail> getRequests() {
         return requestbookservices.getAllRequests();
     }
 
-//    @GetMapping("/getAllResponse")
-//    public  List<RequestBookDetail> getAllResponse(){
-//        return requestbookservices.getAllResponse();
-//    }
 
 }
