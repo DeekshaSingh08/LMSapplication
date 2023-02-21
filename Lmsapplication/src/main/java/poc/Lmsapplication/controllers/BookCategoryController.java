@@ -1,5 +1,7 @@
 package poc.Lmsapplication.controllers;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import poc.Lmsapplication.entities.BookCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -40,8 +42,9 @@ public class BookCategoryController {
     }
 
     @DeleteMapping("/deleteCategory/{id}")
-    public void deleteCategory(@PathVariable("id") Long id) {
+    public ResponseEntity<String> deleteCategory(@PathVariable("id") Long id) {
         bookCategoryService.deleteCategory(id);
+        return new ResponseEntity<>("Category is deleted successfully", HttpStatus.OK);
     }
 
 

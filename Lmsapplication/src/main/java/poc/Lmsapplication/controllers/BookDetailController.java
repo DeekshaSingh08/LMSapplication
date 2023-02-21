@@ -52,7 +52,7 @@ public class BookDetailController {
     @DeleteMapping("/deleteBook/{id}")
     public ResponseEntity<Object> deleteBook(@PathVariable("id") Long id) {
         bookDetailService.deleteBook(id);
-        return new ResponseEntity<>("Book was deleted sucessfully", HttpStatus.OK);
+        return new ResponseEntity<>("Book was deleted successfully", HttpStatus.OK);
 
     }
 }
