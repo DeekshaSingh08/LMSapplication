@@ -33,7 +33,6 @@ public class BookDetailService {
             return bookDetailsRepository.findById(id).orElse(null);
         }
     }
-
     public BookDetails createBook(BookDetails books) {
         return bookDetailsRepository.save(books);
     }
@@ -51,7 +50,6 @@ public class BookDetailService {
         }
 
     }
-
     public void deleteBook(Long id) {
 
         if (!bookDetailsRepository.existsById(id)) {
@@ -67,7 +65,6 @@ public class BookDetailService {
             bookDetails.add(bookDetailsRepository.findById(n).orElse(null));
         });
         return bookDetails;
-      //return bookDetailsRepository.getDetailsByAgeAndCategory(category,minAge);
    }
 
 

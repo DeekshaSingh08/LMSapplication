@@ -37,8 +37,8 @@ public class BookCategoryController {
     }
 
     @PutMapping("/updateCategory")
-    public BookCategory updateCategory(@RequestBody BookCategory bookCategory) {
-        return bookCategoryService.updateCategory(bookCategory);
+    public BookCategory updateCategory( @PathVariable Long id , @RequestBody BookCategory bookCategory) {
+        return bookCategoryService.updateCategory(id,bookCategory);
     }
 
     @DeleteMapping("/deleteCategory/{id}")

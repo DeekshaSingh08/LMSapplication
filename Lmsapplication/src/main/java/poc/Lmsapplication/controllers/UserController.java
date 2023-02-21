@@ -1,5 +1,7 @@
 package poc.Lmsapplication.controllers;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import poc.Lmsapplication.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,10 +31,20 @@ public class UserController {
         return userService.findUserById(id);
     }
 
-    @PostMapping("/saveUser")
-    public User createUser(@RequestBody User user) {
-        return userService.createUser(user);
+    @PostMapping("/userRequest")
+    public String userRequest(@RequestBody User user) {
+        return userService.addRequest(user);
     }
+
+    @PostMapping("/userRequestStatus")
+    public String userRequestStatus(long userid, int responseStatus){
+        return userService.userRequestStatus(userid,responseStatus);
+    }
+
+//    @PostMapping("/saveUser")
+//    public User createUser(@RequestBody User user) {
+//        return userService.createUser(user);
+//    }
 
     @PutMapping("/updateUser/{id}")
     public User updateUser(@PathVariable("id") long id, @RequestBody User user) {
@@ -40,9 +52,9 @@ public class UserController {
     }
 
     @DeleteMapping("/deleteUser/{id}")
-    public String deleteUser(@PathVariable("id") Long id) {
-        return userService.deleteUser(id);
-
+    public ResponseEntity<String> deleteUser(@PathVariable("id") Long id) {
+         userService.deleteUser(id);
+        return new ResponseEntity<>("User is deleted successfully", HttpStatus.OK);
     }
 
 }

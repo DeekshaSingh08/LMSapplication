@@ -1,9 +1,8 @@
 package poc.Lmsapplication.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import poc.Lmsapplication.Enum.ResponseStatus;
+
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -25,6 +24,25 @@ public class User {
     private String sex;
     private String hometown;
     private Date Dob;
+
+    @Enumerated(EnumType.STRING)
+    private ResponseStatus responseStatus;
+
+    public User() {
+    }
+
+    public User(Long userId, String username, String password, Long phoneNumber,
+                String emailId, String sex, String hometown, Date dob, ResponseStatus responseStatus) {
+        this.userId = userId;
+        this.username = username;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.emailId = emailId;
+        this.sex = sex;
+        this.hometown = hometown;
+        Dob = dob;
+        this.responseStatus = responseStatus;
+    }
 
     public Long getUserId() {
         return userId;
@@ -90,23 +108,26 @@ public class User {
         Dob = dob;
     }
 
-    public User(Long userId, String username, String password, Long phoneNumber, String emailId, String sex,
-                String hometown, Date dob) {
-
-        this.userId = userId;
-        this.username = username;
-        this.password = password;
-        this.phoneNumber = phoneNumber;
-        this.emailId = emailId;
-        this.sex = sex;
-        this.hometown = hometown;
-        this.Dob = dob;
+    public ResponseStatus getResponseStatus() {
+        return responseStatus;
     }
 
-    public User() {
-
-
+    public void setResponseStatus(ResponseStatus responseStatus) {
+        this.responseStatus = responseStatus;
     }
 
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", phoneNumber=" + phoneNumber +
+                ", emailId='" + emailId + '\'' +
+                ", sex='" + sex + '\'' +
+                ", hometown='" + hometown + '\'' +
+                ", Dob=" + Dob +
+                ", responseStatus=" + responseStatus +
+                '}';
+    }
 }
