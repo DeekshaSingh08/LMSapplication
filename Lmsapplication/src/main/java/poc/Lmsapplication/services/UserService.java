@@ -28,9 +28,19 @@ public class UserService {
         return userRepository.findById(id).orElse(null);
     }
 
-    public String addRequest(User user){
+    public String addUserRequest(User user){
 
         user.setResponseStatus(ResponseStatus.values()[0]);
+        user.setRole("USER");
+        userRepository.save(user);
+
+        return "Request Submitted for Registration !";
+    }
+
+    public String addAdminRequest(User user){
+
+        user.setResponseStatus(ResponseStatus.values()[0]);
+        user.setRole("ADMIN");
         userRepository.save(user);
 
         return "Request Submitted for Registration !";
@@ -52,12 +62,32 @@ public class UserService {
                 user.setResponseStatus(ResponseStatus.values()[2]);
                 userRepository.save(user);
                 return "User Request Rejected !";
-
             }
         }
-
         return "Request Reviewed !";
     }
+
+    public String adminRequestStatus(long userid, int responseStatus){
+        User user = userRepository.findById(userid).orElse(null);
+        if(user == null){
+            return "Register first !";
+        } else if (user !=null) {
+            if (responseStatus == 1){
+
+                user.setResponseStatus(ResponseStatus.values()[1]);
+                userRepository.save(user);
+                return "Admin Request Approved !";
+
+            } else if (responseStatus == 2) {
+
+                user.setResponseStatus(ResponseStatus.values()[2]);
+                userRepository.save(user);
+                return "Admin Request Rejected !";
+            }
+        }
+        return "Request Reviewed !";
+    }
+
 
 //    public User createUser(User user) {
 //        return userRepository.save(user);

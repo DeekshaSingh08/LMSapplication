@@ -25,14 +25,15 @@ public class User {
     private String hometown;
     private Date Dob;
 
+    private String role;
+
     @Enumerated(EnumType.STRING)
     private ResponseStatus responseStatus;
 
     public User() {
     }
 
-    public User(Long userId, String username, String password, Long phoneNumber,
-                String emailId, String sex, String hometown, Date dob, ResponseStatus responseStatus) {
+    public User(Long userId, String username, String password, Long phoneNumber, String emailId, String sex, String hometown, Date dob, String role, ResponseStatus responseStatus) {
         this.userId = userId;
         this.username = username;
         this.password = password;
@@ -41,7 +42,16 @@ public class User {
         this.sex = sex;
         this.hometown = hometown;
         Dob = dob;
+        this.role = role;
         this.responseStatus = responseStatus;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public Long getUserId() {

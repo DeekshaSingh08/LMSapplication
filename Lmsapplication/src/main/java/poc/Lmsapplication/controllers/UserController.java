@@ -33,12 +33,23 @@ public class UserController {
 
     @PostMapping("/userRequest")
     public String userRequest(@RequestBody User user) {
-        return userService.addRequest(user);
+
+        return userService.addUserRequest(user);
     }
 
+    @PostMapping("/adminRequest")
+    public String adminRequest(@RequestBody User user) {
+
+        return userService.addAdminRequest(user);
+    }
     @PostMapping("/userRequestStatus")
     public String userRequestStatus(long userid, int responseStatus){
         return userService.userRequestStatus(userid,responseStatus);
+    }
+
+    @PostMapping("/adminRequestStatus")
+    public String adminRequestStatus(long userid, int responseStatus){
+        return userService.adminRequestStatus(userid,responseStatus);
     }
 
 //    @PostMapping("/saveUser")
