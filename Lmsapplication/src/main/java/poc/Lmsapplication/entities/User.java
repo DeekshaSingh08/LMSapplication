@@ -1,5 +1,6 @@
 package poc.Lmsapplication.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import poc.Lmsapplication.Enum.ResponseStatus;
 
 import javax.persistence.*;
@@ -23,8 +24,9 @@ public class User {
     private String emailId;
     private String sex;
     private String hometown;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date Dob;
-
+    private int age;
     private String role;
 
     @Enumerated(EnumType.STRING)
@@ -33,7 +35,7 @@ public class User {
     public User() {
     }
 
-    public User(Long userId, String username, String password, Long phoneNumber, String emailId, String sex, String hometown, Date dob, String role, ResponseStatus responseStatus) {
+    public User(Long userId, String username, String password, Long phoneNumber, String emailId, String sex, String hometown, Date dob, int age, String role, ResponseStatus responseStatus) {
         this.userId = userId;
         this.username = username;
         this.password = password;
@@ -42,8 +44,17 @@ public class User {
         this.sex = sex;
         this.hometown = hometown;
         Dob = dob;
+        this.age = age;
         this.role = role;
         this.responseStatus = responseStatus;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public String getRole() {

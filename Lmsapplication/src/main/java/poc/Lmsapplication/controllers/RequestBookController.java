@@ -15,6 +15,7 @@ import java.util.List;
  */
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class RequestBookController {
     @Autowired
     private RequestBookServices requestbookservices;

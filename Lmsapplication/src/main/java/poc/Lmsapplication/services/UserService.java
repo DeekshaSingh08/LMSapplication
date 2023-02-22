@@ -7,6 +7,10 @@ import poc.Lmsapplication.entities.User;
 import poc.Lmsapplication.exceptionhandling.UserNotFoundException;
 import poc.Lmsapplication.repositories.UserRepository;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,13 +32,23 @@ public class UserService {
         return userRepository.findById(id).orElse(null);
     }
 
+    public User findUserByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
     public String addUserRequest(User user){
 
-        user.setResponseStatus(ResponseStatus.values()[0]);
-        user.setRole("USER");
-        userRepository.save(user);
+        if(findUserByUsername(user.getUsername())==null){
+            user.setResponseStatus(ResponseStatus.values()[0]);
+            user.setRole("USER");
+            user.setAge(convertDateOfBirthIntoAge(user.getDob()));
+            userRepository.save(user);
+            return "Request Submitted for Registration !";
+        }
+        else{
+            return "Username is already taken!";
+        }
 
-        return "Request Submitted for Registration !";
     }
 
     public String addAdminRequest(User user){
@@ -75,6 +89,7 @@ public class UserService {
             if (responseStatus == 1){
 
                 user.setResponseStatus(ResponseStatus.values()[1]);
+
                 userRepository.save(user);
                 return "Admin Request Approved !";
 
@@ -87,7 +102,6 @@ public class UserService {
         }
         return "Request Reviewed !";
     }
-
 
 //    public User createUser(User user) {
 //        return userRepository.save(user);
@@ -117,8 +131,25 @@ public class UserService {
             userRepository.deleteById(id);
             return "Successfully deleted !";
         }
-
-
     }
 
+    public int convertDateOfBirthIntoAge(Date date){
+        LocalDate birthDate=convertToLocalDateViaInstant(date);
+        LocalDate currentDate=LocalDate.now();
+        if ((birthDate != null) && (currentDate != null)) {
+            return Period.between(birthDate, currentDate).getYears();
+        } else {
+            return 0;
+        }
+    }
+
+    public LocalDate convertToLocalDateViaInstant(Date dateToConvert) {
+        return dateToConvert.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
+    }
+
+    public List<User> getAdminCommonSearch(String search){
+        return userRepository.getAdminCommonSearch(search);
+    }
 }

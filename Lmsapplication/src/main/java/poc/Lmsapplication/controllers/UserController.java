@@ -16,6 +16,7 @@ import java.util.List;
  */
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserController {
 
     @Autowired
@@ -26,9 +27,16 @@ public class UserController {
         return userService.findAllUsers();
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/userById/{id}")
     public User findUserById(@PathVariable("id") Long id) {
         return userService.findUserById(id);
+    }
+
+    @GetMapping("/user/{username}")
+//    public User findUserByUsername(@PathVariable("username") String username){ return userService.findUserByUsername(username);}
+    public User getUser(@PathVariable(value="username") String username)
+    {
+        return userService.findUserByUsername(username);
     }
 
     @PostMapping("/userRequest")
@@ -68,4 +76,8 @@ public class UserController {
         return new ResponseEntity<>("User is deleted successfully", HttpStatus.OK);
     }
 
+    @GetMapping("/getAdminCommonSearch")
+    public List<User> getAdminCommonSearch(@PathVariable("search") String search){
+        return userService.getAdminCommonSearch(search);
+    }
 }

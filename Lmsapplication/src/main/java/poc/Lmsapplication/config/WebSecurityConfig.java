@@ -53,9 +53,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 //        httpSecurity.httpBasic();
 //        httpSecurity.httpBasic(withDefaults());
-        httpSecurity.csrf().disable()
+        httpSecurity.csrf().disable().cors().disable()
 
                 .authorizeRequests().antMatchers("/authenticate").permitAll().
+//                .authorizeRequests().antMatchers("/*").permitAll().
 
                 anyRequest().authenticated().and().
 

@@ -2,13 +2,10 @@ package poc.Lmsapplication.controllers;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.*;
 import poc.Lmsapplication.Enum.ResponseStatus;
 import poc.Lmsapplication.entities.IssueBook;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import poc.Lmsapplication.services.IssueBookService;
 
 /**
@@ -18,6 +15,7 @@ import poc.Lmsapplication.services.IssueBookService;
  */
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class IssueBookController {
 
     @Autowired
