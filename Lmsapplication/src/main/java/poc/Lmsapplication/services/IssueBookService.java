@@ -1,5 +1,7 @@
 package poc.Lmsapplication.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +28,7 @@ import java.util.List;
 @Service
 public class IssueBookService {
 
+    Logger logger = LoggerFactory.getLogger(IssueBookService.class);
     @Autowired
     private IssueBookRepository issueBookRepository;
 
@@ -41,10 +44,10 @@ public class IssueBookService {
         BookDetails book = bookDetailsRepository.findById(bookid).orElse(null);
 
         if (book == null || user == null) {
+            logger.error("BookId and UserId not found...");
             return "Enter BookId and UserId !";
         } else {
             if (book.getQuantity() != 0) {
-
                 IssueBook bookIssueDetails = new IssueBook();
                 bookIssueDetails.setBookDetails(book);
                 bookIssueDetails.setUser(user);
@@ -53,8 +56,10 @@ public class IssueBookService {
                 bookIssueDetails.setReturnDate(null);
                 bookIssueDetails.setReturnedDate(null);
                 issueBookRepository.save(bookIssueDetails);
+                logger.info("Sending Issue Request...");
                 return "Requested Successfully !";
             } else if (book.getQuantity() == 0) {
+                logger.info("Book is not available...");
                 return "Sorry Book is not available !";
             } else {
                 return null;
@@ -66,6 +71,7 @@ public class IssueBookService {
     public String addResponse(Long issueId, int responseStatus) {
         IssueBook issueBook = issueBookRepository.findById(issueId).orElse(null);
         if (issueId == null) {
+            logger.error("Request doesn't exits...");
             return "Request does not exits !";
         } else if (issueId != null) {
             if (responseStatus == 1) {
@@ -83,6 +89,7 @@ public class IssueBookService {
                 }
                 issueBook.setReturnedDate(null);
                 issueBookRepository.save(issueBook);
+                logger.info("Request Approved...");
                 return "Request Approved !";
             } else if (responseStatus == 2) {
 
@@ -91,13 +98,14 @@ public class IssueBookService {
                 issueBook.setReturnDate(null);
                 issueBook.setReturnedDate(null);
                 issueBookRepository.save(issueBook);
+                logger.info("Request Rejected...");
                 return "Request Rejected !";
-
             }
         } else {
+            logger.info("Request Cancelled...");
             return "Request Cancelled";
         }
-
+        logger.info("Request Reviewed...");
         return "Request Reviewed !";
     }
 
@@ -120,13 +128,15 @@ public class IssueBookService {
             try {
                 issueBook.setReturnedDate(formatter.parse(localDateTime.toString()));
             } catch (ParseException e) {
-
+                logger.info("In catch block...");
                 e.printStackTrace();
             }
             issueBookRepository.save(issueBook);
-            return "Return successfully!";
+            logger.info("Book returned successfully...");
+            return "Returned Successfully!";
         } else {
-            return "First take the book !";
+            logger.error("No issued book found...");
+            return "No Issued Book Found!";
         }
     }
     public List<IssueBook> findAllBookOverdue() {

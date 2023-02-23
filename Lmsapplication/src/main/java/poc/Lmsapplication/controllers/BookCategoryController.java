@@ -1,5 +1,7 @@
 package poc.Lmsapplication.controllers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import poc.Lmsapplication.entities.BookCategory;
@@ -19,6 +21,7 @@ import java.util.List;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class BookCategoryController {
 
+    Logger logger = LoggerFactory.getLogger(BookCategoryController.class);
     @Autowired
     BookCategoryService bookCategoryService;
 
@@ -34,11 +37,13 @@ public class BookCategoryController {
 
     @PostMapping("/createCategory")
     private BookCategory createCategory(@RequestBody BookCategory bookCategory) {
+        logger.info("Saving Category Details..");
         return bookCategoryService.createCategory(bookCategory);
     }
 
     @PutMapping("/updateCategory")
     public BookCategory updateCategory( @PathVariable Long id , @RequestBody BookCategory bookCategory) {
+        logger.info("Updating Category Details..");
         return bookCategoryService.updateCategory(id,bookCategory);
     }
 

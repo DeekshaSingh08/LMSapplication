@@ -1,5 +1,8 @@
 package poc.Lmsapplication.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import poc.Lmsapplication.controllers.BookCategoryController;
 import poc.Lmsapplication.entities.BookCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +20,7 @@ import java.util.List;
 @Service
 public class BookCategoryService {
 
+    Logger logger = LoggerFactory.getLogger(BookCategoryService.class);
     @Autowired
     BookCategoryRepository bookCategoryRepository;
 
@@ -34,8 +38,10 @@ public class BookCategoryService {
 
     public BookCategory updateCategory(Long id, BookCategory category) {
         if (!bookCategoryRepository.existsById(id)) {
-            throw new BookNotFoundException("book was not found");
+            logger.error("Cannot Find Book Category...");
+            throw new BookNotFoundException("Book Category was not found");
         } else {
+            logger.info("Updating Book Category....");
             BookCategory bookCategory = bookCategoryRepository.findById(id).orElse(null);
             bookCategory.setCategory(category.getCategory());
             bookCategory.setMaxAge(category.getMaxAge());

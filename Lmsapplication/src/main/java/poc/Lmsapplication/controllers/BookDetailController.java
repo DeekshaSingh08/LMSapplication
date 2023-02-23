@@ -1,5 +1,7 @@
 package poc.Lmsapplication.controllers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,7 @@ import java.util.List;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class BookDetailController {
 
+    Logger logger = LoggerFactory.getLogger(BookDetailController.class);
     @Autowired
     BookDetailService bookDetailService;
 
@@ -29,13 +32,12 @@ public class BookDetailController {
 
     @GetMapping("/book/{id}")
     public BookDetails getBooks(@PathVariable("id") Long id) {
-
         return bookDetailService.findBookById(id);
     }
 
     @PostMapping("/saveBook")
     public BookDetails saveBook(@RequestBody BookDetails books) {
-
+        logger.info("Saving Book Details..");
         return bookDetailService.createBook(books);
 
     }
@@ -47,6 +49,7 @@ public class BookDetailController {
 
     @RequestMapping(value = "/updateBook/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Object> updateBook(@PathVariable("id") Long id, @RequestBody BookDetails book) {
+        logger.info("Updating Book Details..");
         return new ResponseEntity<>(bookDetailService.updateBook(book, id), HttpStatus.OK);
     }
 

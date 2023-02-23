@@ -1,5 +1,7 @@
 package poc.Lmsapplication.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import poc.Lmsapplication.entities.BookDetails;
 import poc.Lmsapplication.exceptionhandling.BookNotFoundException;
 
@@ -19,6 +21,7 @@ import java.util.List;
 @Service
 public class BookDetailService {
 
+    Logger logger = LoggerFactory.getLogger(BookDetailService.class);
     @Autowired
     BookDetailsRepository bookDetailsRepository;
 
@@ -28,8 +31,10 @@ public class BookDetailService {
 
     public BookDetails findBookById(Long id) {
         if (!bookDetailsRepository.existsById(id)) {
-            throw new BookNotFoundException("book was not found");
+            logger.error("Cannot Find Book...");
+            throw new BookNotFoundException("Book was not found");
         } else {
+            logger.info("Finding Book By Id....");
             return bookDetailsRepository.findById(id).orElse(null);
         }
     }
@@ -39,8 +44,10 @@ public class BookDetailService {
 
     public BookDetails updateBook(BookDetails books, long id) {
         if (!bookDetailsRepository.existsById(id)) {
-            throw new BookNotFoundException("book was not found");
+            logger.error("Cannot Find Book...");
+            throw new BookNotFoundException("Book was not found");
         } else {
+            logger.info("Updating Book Details...");
             BookDetails bookDetails = bookDetailsRepository.findById(id).orElse(books);
             bookDetails.setAuthorName(books.getAuthorName());
             bookDetails.setBookCategory(books.getBookCategory());
