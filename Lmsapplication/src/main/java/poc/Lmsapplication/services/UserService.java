@@ -1,5 +1,7 @@
 package poc.Lmsapplication.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import poc.Lmsapplication.Enum.ResponseStatus;
@@ -21,6 +23,7 @@ import java.util.List;
 @Service
 public class UserService {
 
+    Logger logger = LoggerFactory.getLogger(UserService.class);
     @Autowired
     UserRepository userRepository;
 
@@ -43,9 +46,11 @@ public class UserService {
             user.setRole("USER");
             user.setAge(convertDateOfBirthIntoAge(user.getDob()));
             userRepository.save(user);
+            logger.info("Request Submitted for Registration...");
             return "Request Submitted for Registration !";
         }
         else{
+            logger.error("Username is already taken...");
             return "Username is already taken!";
         }
 
@@ -63,43 +68,49 @@ public class UserService {
     public String userRequestStatus(long userid, int responseStatus){
         User user = userRepository.findById(userid).orElse(null);
         if(user == null){
+            logger.error("No user record found...");
             return "Register first !";
         } else if (user !=null) {
             if (responseStatus == 1){
 
                 user.setResponseStatus(ResponseStatus.values()[1]);
                 userRepository.save(user);
+                logger.info("User request approved...");
                 return "User Request Approved !";
 
             } else if (responseStatus == 2) {
 
                 user.setResponseStatus(ResponseStatus.values()[2]);
                 userRepository.save(user);
+                logger.info("User request rejected...");
                 return "User Request Rejected !";
             }
         }
+        logger.info("Request reviewed...");
         return "Request Reviewed !";
     }
 
     public String adminRequestStatus(long userid, int responseStatus){
         User user = userRepository.findById(userid).orElse(null);
         if(user == null){
+            logger.error("No registration record found...");
             return "Register first !";
         } else if (user !=null) {
             if (responseStatus == 1){
-
                 user.setResponseStatus(ResponseStatus.values()[1]);
-
                 userRepository.save(user);
+                logger.info("Admin request approved...");
                 return "Admin Request Approved !";
 
             } else if (responseStatus == 2) {
 
                 user.setResponseStatus(ResponseStatus.values()[2]);
                 userRepository.save(user);
+                logger.info("Admin request rejected...");
                 return "Admin Request Rejected !";
             }
         }
+        logger.info("Admin request reviewed...");
         return "Request Reviewed !";
     }
 
@@ -109,6 +120,7 @@ public class UserService {
 
     public User updateUser(User user, long id) {
         if (!userRepository.existsById(id)) {
+            logger.error("No user record found...");
             throw new UserNotFoundException("User was not found !");
         } else {
             User userdetails = userRepository.findById(id).orElse(user);
@@ -119,6 +131,7 @@ public class UserService {
             userdetails.setSex(user.getSex());
             userdetails.setHometown(user.getHometown());
             userdetails.setDob(user.getDob());
+            logger.info("User details updated...");
             return userRepository.save(userdetails);
         }
 
@@ -126,9 +139,11 @@ public class UserService {
 
     public String deleteUser(Long id) {
         if (!userRepository.existsById(id)) {
+            logger.error("No user record found...");
             throw new UserNotFoundException("user was not found");
         } else {
             userRepository.deleteById(id);
+            logger.info("User deleted successfully...");
             return "Successfully deleted !";
         }
     }

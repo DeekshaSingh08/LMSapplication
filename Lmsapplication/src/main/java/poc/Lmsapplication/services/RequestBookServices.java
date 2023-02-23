@@ -1,5 +1,7 @@
 package poc.Lmsapplication.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import poc.Lmsapplication.dto.RequestBookDto;
 import poc.Lmsapplication.entities.RequestBookDetail;
 import poc.Lmsapplication.entities.User;
@@ -19,6 +21,8 @@ import java.util.List;
 
 @Service
 public class RequestBookServices {
+
+    Logger logger = LoggerFactory.getLogger(RequestBookServices.class);
     @Autowired
     private RequestBookDetailRepository requestBookDetailRepository;
     @Autowired
@@ -38,8 +42,10 @@ public class RequestBookServices {
             requestBookDetail.setAuthorName(requestBookDto.getAuthorName());
             requestBookDetail.setBookName(requestBookDto.getBookName());
             requestBookDetail.setUser(user);
+            logger.info("Book Requested Successfully...");
             return requestBookDetailRepository.save(requestBookDetail);
         } else {
+            logger.info("Cannot Create Request...");
             return null;
 
         }
