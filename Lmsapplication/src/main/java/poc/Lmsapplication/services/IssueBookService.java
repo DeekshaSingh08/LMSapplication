@@ -105,6 +105,9 @@ public class IssueBookService {
         return issueBookRepository.findAll();
     }
 
+    public List<IssueBook> getApprovedIssues() {
+          return issueBookRepository.findByResponseStatus(ResponseStatus.APPROVED);
+    }
 
     public String returnBook(long issueId) {
         IssueBook issueBook = issueBookRepository.findById(issueId).orElse(null);
@@ -125,9 +128,7 @@ public class IssueBookService {
         } else {
             return "First take the book !";
         }
-
     }
-
     public List<IssueBook> findAllBookOverdue() {
 
         Date curentDate = new Date();
@@ -145,6 +146,5 @@ public class IssueBookService {
         return books;
 
     }
-
 
 }

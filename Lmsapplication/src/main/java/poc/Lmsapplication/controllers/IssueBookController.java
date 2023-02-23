@@ -33,9 +33,12 @@ public class IssueBookController {
 
     @GetMapping("/getAllIssues")
     public List<IssueBook> getAllIssues() {
-
         return issueBookService.getAllIssues();
+    }
 
+    @GetMapping("/getApprovedIssues")
+    public List<IssueBook> getApprovedIssues() {
+        return issueBookService.getApprovedIssues();
     }
 
     @PostMapping("/returnBook")
