@@ -41,7 +41,7 @@ public class BookCategoryController {
         return bookCategoryService.createCategory(bookCategory);
     }
 
-    @PutMapping("/updateCategory")
+    @PutMapping("/updateCategory/{id}")
     public BookCategory updateCategory( @PathVariable Long id , @RequestBody BookCategory bookCategory) {
         logger.info("Updating Category Details..");
         return bookCategoryService.updateCategory(id,bookCategory);

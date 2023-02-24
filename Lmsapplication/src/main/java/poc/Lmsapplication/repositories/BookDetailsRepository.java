@@ -18,6 +18,7 @@ import java.util.Optional;
 @Repository
 public interface BookDetailsRepository extends JpaRepository<BookDetails, Long> {
     public List<BookDetails> findByBookName(String name);
+
     @Query(value = "{call searchBooksByCategoryAndAge(?1,?2)}", nativeQuery = true)
     public List<Long> getDetailsByAgeAndCategory(String category, int minAge);
 

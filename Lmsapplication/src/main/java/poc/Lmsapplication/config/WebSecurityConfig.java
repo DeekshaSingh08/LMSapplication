@@ -16,7 +16,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
+import poc.Lmsapplication.entities.CustomerUserDetail;
+import poc.Lmsapplication.services.CustomerUserDetailService;
 
 
 @Configuration
@@ -28,14 +29,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
     @Autowired
-    private UserDetailsService jwtUserDetailsService;
+    private CustomerUserDetailService customerUserDetailService;
 
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(jwtUserDetailsService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(customerUserDetailService).passwordEncoder(passwordEncoder());
     }
 
 //    @Bean
@@ -66,7 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //        httpSecurity.httpBasic(withDefaults());
         httpSecurity.csrf().disable().cors().disable()
 
-                .authorizeRequests().antMatchers("/authenticate").permitAll().
+                .authorizeRequests().antMatchers("/authenticate","/userRequestStatus/**","/userRequest").permitAll().
 //                .authorizeRequests().antMatchers("/*").permitAll().
 
                 anyRequest().authenticated().and().

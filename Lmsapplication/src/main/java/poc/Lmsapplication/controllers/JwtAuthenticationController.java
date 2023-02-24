@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import poc.Lmsapplication.config.JwtTokenUtil;
 import poc.Lmsapplication.entities.JwtRequest;
 import poc.Lmsapplication.entities.JwtResponse;
-import poc.Lmsapplication.services.JwtUserDetailsService;
+import poc.Lmsapplication.services.CustomerUserDetailService;
+
 
 /**
  * JwtAuthentication controller class of API
@@ -31,13 +32,13 @@ public class JwtAuthenticationController {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
     @Autowired
-    private JwtUserDetailsService userDetailsService;
+    private CustomerUserDetailService customerUserDetailService;
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-        final UserDetails userDetails = userDetailsService
+        final UserDetails userDetails = customerUserDetailService
                 .loadUserByUsername(authenticationRequest.getUsername());
 //        final String token = "Bearer " + jwtTokenUtil.generateToken(userDetails);
         final String token = jwtTokenUtil.generateToken(userDetails);

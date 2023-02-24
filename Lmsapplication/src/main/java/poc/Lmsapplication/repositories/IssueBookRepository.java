@@ -16,10 +16,7 @@ import java.util.List;
 
 @Repository
 public interface IssueBookRepository extends JpaRepository<IssueBook, Long> {
-
     public List<IssueBook> findByReturnDate(Date date);
 
-     List<IssueBook> findByResponseStatus(ResponseStatus responseStatus);
-
-    //List<IssueBook> findResponseById();
+    List<IssueBook> findByResponseStatus(ResponseStatus responseStatus);
 }

@@ -3,6 +3,8 @@ package poc.Lmsapplication.services;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import poc.Lmsapplication.Enum.ResponseStatus;
 import poc.Lmsapplication.entities.User;
@@ -27,6 +29,9 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     public List<User> findAllUsers() {
         return userRepository.findAll();
     }
@@ -35,16 +40,17 @@ public class UserService {
         return userRepository.findById(id).orElse(null);
     }
 
-    public User findUserByUsername(String username) {
+    public List<User> findUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
     public String addUserRequest(User user){
 
-        if(findUserByUsername(user.getUsername())==null){
+        if(findUserByUsername(user.getUsername()).size()==0){
             user.setResponseStatus(ResponseStatus.values()[0]);
             user.setRole("USER");
             user.setAge(convertDateOfBirthIntoAge(user.getDob()));
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepository.save(user);
             logger.info("Request Submitted for Registration...");
             return "Request Submitted for Registration !";
@@ -58,11 +64,23 @@ public class UserService {
 
     public String addAdminRequest(User user){
 
-        user.setResponseStatus(ResponseStatus.values()[0]);
-        user.setRole("ADMIN");
-        userRepository.save(user);
-
-        return "Request Submitted for Registration !";
+//        user.setResponseStatus(ResponseStatus.values()[0]);
+//        user.setRole("ADMIN");
+//        userRepository.save(user);
+//        return "Request Submitted for Registration !";
+        if(findUserByUsername(user.getUsername()).size()==0){
+            user.setResponseStatus(ResponseStatus.values()[0]);
+            user.setRole("ADMIN");
+            user.setAge(convertDateOfBirthIntoAge(user.getDob()));
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            userRepository.save(user);
+            logger.info("Request Submitted for Registration...");
+            return "Request Submitted for Registration !";
+        }
+        else{
+            logger.error("Username is already taken...");
+            return "Username is already taken!";
+        }
     }
 
     public String userRequestStatus(long userid, int responseStatus){

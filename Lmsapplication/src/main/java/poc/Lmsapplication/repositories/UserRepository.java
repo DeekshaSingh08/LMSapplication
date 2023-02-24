@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import poc.Lmsapplication.entities.User;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * UserRepository of API
@@ -14,10 +15,10 @@ import java.util.List;
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-
-    User findByUsername(String username);
+    List<User> findByUsername(String username);
 
     @Query(value = "{call getAdminCommonSearch(?1)}", nativeQuery = true)
     public List<User> getAdminCommonSearch(String search);
 
+    List<User> findByusername(String username);
 }
