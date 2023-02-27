@@ -27,6 +27,7 @@ import static org.mockito.Mockito.when;
 
 /**
  * @author deeksha.singh
+ * Test Cases For UserController Class
  */
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)

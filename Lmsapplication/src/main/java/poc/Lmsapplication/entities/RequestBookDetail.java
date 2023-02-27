@@ -2,6 +2,7 @@ package poc.Lmsapplication.entities;
 
 
 import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * RequestBookDetail entity of API
@@ -75,5 +76,29 @@ public class RequestBookDetail {
 
     public void setAuthorName(String authorName) {
         this.authorName = authorName;
+    }
+
+    @Override
+    public String toString() {
+        return "RequestBookDetail{" +
+                "requestId=" + requestId +
+                ", user=" + user +
+                ", bookCategory='" + bookCategory + '\'' +
+                ", bookName='" + bookName + '\'' +
+                ", authorName='" + authorName + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RequestBookDetail that = (RequestBookDetail) o;
+        return Objects.equals(requestId, that.requestId) && Objects.equals(user, that.user) && Objects.equals(bookCategory, that.bookCategory) && Objects.equals(bookName, that.bookName) && Objects.equals(authorName, that.authorName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(requestId, user, bookCategory, bookName, authorName);
     }
 }

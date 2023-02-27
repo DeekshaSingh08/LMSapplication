@@ -39,16 +39,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(customerUserDetailService).passwordEncoder(passwordEncoder());
     }
 
-//    @Bean
-//    public DaoAuthenticationProvider authenticationProvider() {
-//        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-//
-//        authProvider.setUserDetailsService(jwtUserDetailsService);
-//        authProvider.setPasswordEncoder(passwordEncoder());
-//
-//        return authProvider;
-//    }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -63,14 +53,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
 
-//        httpSecurity.httpBasic();
-//        httpSecurity.httpBasic(withDefaults());
+
         httpSecurity.csrf().disable().cors().disable()
 
-                .authorizeRequests().antMatchers("/authenticate","/userRequestStatus/**","/userRequest").permitAll().
+                .authorizeRequests().antMatchers("/authenticate", "/userRequestStatus/**", "/userRequest").permitAll().
 //                .authorizeRequests().antMatchers("/*").permitAll().
 
-                anyRequest().authenticated().and().
+        anyRequest().authenticated().and().
 
                 exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
