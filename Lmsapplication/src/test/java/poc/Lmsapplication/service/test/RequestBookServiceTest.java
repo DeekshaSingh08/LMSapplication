@@ -125,7 +125,6 @@ public class RequestBookServiceTest {
         RequestBookDto requestBookDto1 = new RequestBookDto("Shatter Series","Ana","Novel");
 
         RequestBookDetail requestBookDetail1 = new RequestBookDetail();
-        requestBookDetail1.setRequestId(1l);
         requestBookDetail1.setBookCategory(requestBookDto1.getCategory());
         requestBookDetail1.setBookName(requestBookDto1.getBookName());
         requestBookDetail1.setAuthorName(requestBookDto1.getAuthorName());
@@ -134,17 +133,16 @@ public class RequestBookServiceTest {
         when(userRepository.findById(1l)).thenReturn(Optional.of(user1));
         when(bookDetailsRepository.findByBookName(requestBookDto.getBookName())).thenReturn((bookDetailsList));
 
-        System.out.println(userRepository.findById(1l));
-        System.out.println(bookDetailsRepository.findByBookName(requestBookDto.getBookName()).size());
+        RequestBookDetail requestBookDetail2 = new RequestBookDetail();
+        requestBookDetail2.setRequestId(1l);
+        requestBookDetail2.setBookCategory(requestBookDto1.getCategory());
+        requestBookDetail2.setBookName(requestBookDto1.getBookName());
+        requestBookDetail2.setAuthorName(requestBookDto1.getAuthorName());
+        requestBookDetail2.setUser(user1);
 
-        when(requestBookDetailRepository.save(requestBookDetail1)).thenReturn(requestBookDetail1);
-
-        System.out.println(requestBookDetailRepository.save(requestBookDetail1));
-
-//        RequestBookDetail actual = requestBookServices.addRequest(requestBookDto1,user1.getUserId());
-          RequestBookDetail actual = requestBookServices.addRequest(requestBookDto1,1l);
-          System.out.println(actual);
-//        assertNotNull(actual);
+        when(requestBookDetailRepository.save(requestBookDetail1)).thenReturn(requestBookDetail2);
+        RequestBookDetail actual = requestBookServices.addRequest(requestBookDto1,1l);
+        assertNotNull(actual);
 
     }
 

@@ -45,7 +45,6 @@ public class RequestBookServices {
         } else {
             logger.info("Cannot Create Request...");
             return null;
-
         }
     }
 
