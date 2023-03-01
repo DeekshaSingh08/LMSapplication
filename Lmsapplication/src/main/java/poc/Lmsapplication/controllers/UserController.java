@@ -86,4 +86,9 @@ public class UserController {
     public List<User> getAdminCommonSearch(@PathVariable("search") String search) {
         return userService.getAdminCommonSearch(search);
     }
+
+    @GetMapping("/getCustomerCommonSearch")
+    public List<User> getCustomerCommonSearch(@PathVariable("search") String search) {
+        return userService.getCustomerCommonSearch(search);
+    }
 }

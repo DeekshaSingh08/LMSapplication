@@ -1,5 +1,6 @@
 package poc.Lmsapplication.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import poc.Lmsapplication.Enum.ResponseStatus;
 
 import javax.persistence.*;
@@ -25,8 +26,11 @@ public class IssueBook {
     @JoinColumn(name = "user_Id", referencedColumnName = "userId")
     private User user;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date issueDate;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date returnDate;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date returnedDate;
     @Enumerated(EnumType.STRING)
     private ResponseStatus responseStatus;

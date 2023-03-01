@@ -20,5 +20,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value = "{call getAdminCommonSearch(?1)}", nativeQuery = true)
     public List<User> getAdminCommonSearch(String search);
 
-    List<User> findByusername(String username);
+    @Query(value = "{call getCustomerCommonSearch(?1)}", nativeQuery = true)
+    List<User> getCustomerCommonSearch(String search);
 }

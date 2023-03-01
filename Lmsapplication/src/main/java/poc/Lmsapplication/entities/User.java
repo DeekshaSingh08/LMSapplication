@@ -26,7 +26,7 @@ public class User {
     private String hometown;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date Dob;
-    private int age;
+//    private int age;
     private String role;
 
     @Enumerated(EnumType.STRING)
@@ -44,18 +44,18 @@ public class User {
         this.sex = sex;
         this.hometown = hometown;
         Dob = dob;
-        this.age = age;
+//        this.age = age;
         this.role = role;
         this.responseStatus = responseStatus;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
+//    public int getAge() {
+//        return age;
+//    }
+//
+//    public void setAge(int age) {
+//        this.age = age;
+//    }
 
     public String getRole() {
         return role;

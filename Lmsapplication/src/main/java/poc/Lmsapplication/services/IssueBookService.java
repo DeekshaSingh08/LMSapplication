@@ -141,20 +141,17 @@ public class IssueBookService {
     }
     public List<IssueBook> findAllBookOverdue() {
 
-        Date curentDate = new Date();
+        Date currentDate = new Date();
         List<IssueBook> books = new ArrayList<>();
         issueBookRepository.findAll().forEach(n -> {
 
             if (n.getReturnedDate() == null) {
-                if (!(n.getReturnDate().before(curentDate))) {
+                if ((n.getReturnDate().before(currentDate))) {
                     books.add(n);
                 }
-
             }
         });
-
         return books;
-
     }
 
 }

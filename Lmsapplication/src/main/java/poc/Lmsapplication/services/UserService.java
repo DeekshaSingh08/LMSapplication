@@ -49,7 +49,7 @@ public class UserService {
         if(findUserByUsername(user.getUsername()).size()==0){
             user.setResponseStatus(ResponseStatus.values()[0]);
             user.setRole("USER");
-            user.setAge(convertDateOfBirthIntoAge(user.getDob()));
+//            user.setAge(convertDateOfBirthIntoAge(user.getDob()));
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepository.save(user);
             logger.info("Request Submitted for Registration...");
@@ -71,7 +71,7 @@ public class UserService {
         if(findUserByUsername(user.getUsername()).size()==0){
             user.setResponseStatus(ResponseStatus.values()[0]);
             user.setRole("ADMIN");
-            user.setAge(convertDateOfBirthIntoAge(user.getDob()));
+//            user.setAge(convertDateOfBirthIntoAge(user.getDob()));
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepository.save(user);
             logger.info("Request Submitted for Registration...");
@@ -184,5 +184,9 @@ public class UserService {
 
     public List<User> getAdminCommonSearch(String search){
         return userRepository.getAdminCommonSearch(search);
+    }
+
+    public List<User> getCustomerCommonSearch(String search) {
+        return userRepository.getCustomerCommonSearch(search);
     }
 }
