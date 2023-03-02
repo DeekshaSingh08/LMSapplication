@@ -83,12 +83,12 @@ public class UserController {
     }
 
     @GetMapping("/getAdminCommonSearch")
-    public List<User> getAdminCommonSearch(@PathVariable("search") String search) {
+    public List<User> getAdminCommonSearch(@RequestParam("search") String search) {
         return userService.getAdminCommonSearch(search);
     }
 
     @GetMapping("/getCustomerCommonSearch")
-    public List<User> getCustomerCommonSearch(@PathVariable("search") String search) {
+    public List<User> getCustomerCommonSearch(@RequestParam("search") String search) {
         return userService.getCustomerCommonSearch(search);
     }
 }
