@@ -2,6 +2,7 @@ package poc.Lmsapplication.services;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Transactional;
 import poc.Lmsapplication.dto.RequestBookDto;
 import poc.Lmsapplication.entities.RequestBookDetail;
 import poc.Lmsapplication.entities.User;
@@ -20,6 +21,7 @@ import java.util.List;
  */
 
 @Service
+@Transactional()
 public class RequestBookServices {
 
     Logger logger = LoggerFactory.getLogger(RequestBookServices.class);

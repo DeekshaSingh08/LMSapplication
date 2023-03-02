@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import poc.Lmsapplication.Enum.ResponseStatus;
 import poc.Lmsapplication.entities.User;
 import poc.Lmsapplication.exceptionhandling.UserNotFoundException;
@@ -23,6 +24,7 @@ import java.util.List;
  * @author deeksha.singh
  */
 @Service
+@Transactional()
 public class UserService {
 
     Logger logger = LoggerFactory.getLogger(UserService.class);

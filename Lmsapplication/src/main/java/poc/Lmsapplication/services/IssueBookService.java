@@ -26,6 +26,7 @@ import java.util.List;
  * @author deeksha.singh
  */
 @Service
+@Transactional()
 public class IssueBookService {
 
     Logger logger = LoggerFactory.getLogger(IssueBookService.class);
@@ -38,7 +39,7 @@ public class IssueBookService {
     @Autowired
     private UserRepository userRepository;
 
-    @Transactional()
+
     public String addIssue(long bookid, long userid) {
         User user = userRepository.findById(userid).orElse(null);
         BookDetails book = bookDetailsRepository.findById(bookid).orElse(null);

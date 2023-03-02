@@ -79,7 +79,7 @@ public class RequestBookServiceTest {
         user1.setSex("Female");
         user1.setHometown("Banaras");
         user1.setDob(null);
-        user1.setAge(22);
+//        user1.setAge(22);
         user1.setRole("Admin");
         user1.setResponseStatus(ResponseStatus.APPROVED);
         userList.add(user1);
@@ -114,7 +114,7 @@ public class RequestBookServiceTest {
         user1.setSex("Female");
         user1.setHometown("Banaras");
         user1.setDob(null);
-        user1.setAge(22);
+//        user1.setAge(22);
         user1.setRole("Admin");
         user1.setResponseStatus(ResponseStatus.APPROVED);
         userList.add(user1);

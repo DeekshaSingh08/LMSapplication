@@ -2,6 +2,7 @@ package poc.Lmsapplication.services;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Transactional;
 import poc.Lmsapplication.controllers.BookCategoryController;
 import poc.Lmsapplication.entities.BookCategory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import java.util.List;
  * @author deeksha.singh
  */
 @Service
+@Transactional()
 public class BookCategoryService {
 
     Logger logger = LoggerFactory.getLogger(BookCategoryService.class);

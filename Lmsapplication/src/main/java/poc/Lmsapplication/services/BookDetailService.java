@@ -2,6 +2,7 @@ package poc.Lmsapplication.services;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Transactional;
 import poc.Lmsapplication.entities.BookDetails;
 import poc.Lmsapplication.exceptionhandling.BookNotFoundException;
 
@@ -19,6 +20,7 @@ import java.util.List;
  */
 
 @Service
+@Transactional()
 public class BookDetailService {
 
     Logger logger = LoggerFactory.getLogger(BookDetailService.class);
